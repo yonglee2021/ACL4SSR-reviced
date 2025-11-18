@@ -1,0 +1,357 @@
+proxy-groups:
+- name: 🚀 节点选择
+  type: select
+  proxies:
+  - ♻️ 自动选择
+  - 🌐 WARP+
+  - 🇭🇰 香港节点
+  - 🇺🇲 美国节点
+  - ☑️ 手动切换
+  - DIRECT
+- name: ☑️ 手动切换
+  type: select
+  include-all: true
+  filter: .*
+- name: ♻️ 自动选择
+  type: url-test
+  include-all: true
+  filter: .*
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+- name: 🌐 WARP+
+  type: url-test
+  include-all: true
+  filter: (WARP|Warp|warp)
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+- name: 📹 油管视频
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - ♻️ 自动选择
+  - ☑️ 手动切换
+  - DIRECT
+- name: 🎥 奈飞视频
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - ♻️ 自动选择
+  - ☑️ 手动切换
+  - DIRECT
+  include-all: true
+  filter: (NF|奈飞|解锁|Netflix|NETFLIX|Media|MITM)
+- name: 🌍 国外媒体
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - ♻️ 自动选择
+  - 🎯 全球直连
+  include-all: true
+  filter: .*
+- name: 📲 电报信息
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🎯 全球直连
+  - 🌐 WARP+
+  include-all: true
+  filter: .*
+- name: 🤖 OpenAi
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - ♻️ 自动选择
+  - 🇺🇲 美国节点
+  - ☑️ 手动切换
+  - DIRECT
+- name: Ⓜ️ 微软服务
+  type: select
+  proxies:
+  - 🎯 全球直连
+  - 🚀 节点选择
+  include-all: true
+  filter: .*
+- name: 🍎 苹果服务
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🎯 全球直连
+  include-all: true
+  filter: .*
+- name: 📢 谷歌FCM
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🎯 全球直连
+  - ♻️ 自动选择
+  include-all: true
+  filter: .*
+- name: 🎯 全球直连
+  type: select
+  proxies:
+  - DIRECT
+  - 🚀 节点选择
+  - ♻️ 自动选择
+- name: 🛑 全球拦截
+  type: select
+  proxies:
+  - REJECT
+  - DIRECT
+- name: 🍃 应用净化
+  type: select
+  proxies:
+  - REJECT
+  - DIRECT
+- name: 🐟 漏网之鱼
+  type: select
+  proxies:
+  - 🚀 节点选择
+  - 🎯 全球直连
+  - ♻️ 自动选择
+  - 🌐 WARP+
+  include-all: true
+  filter: .*
+- name: ☁️ CloudFlareCDN
+  type: select
+  proxies:
+  - 🐟 漏网之鱼
+  - 🚀 节点选择
+  - 🎯 全球直连
+  - ♻️ 自动选择
+  - 🌐 WARP+
+- name: 🇭🇰 香港节点
+  type: load-balance
+  include-all: true
+  filter: (港|HK|hk|Hong Kong|HongKong|hongkong|HKG)
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 50
+- name: 🇺🇲 美国节点
+  type: load-balance
+  include-all: true
+  filter: (美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States|ATL|BUF|DFW|EWR|IAD|LAX|MCI|MIA|ORD|PHX|PDX|SEA|SJC)
+  url: http://www.gstatic.com/generate_204
+  interval: 300
+  tolerance: 150
+rule-providers:
+  CFnat:
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/refs/heads/main/Clash/CFnat.list
+    path: ./ruleset/CFnat.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  LocalAreaNetwork:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list
+    path: ./ruleset/LocalAreaNetwork.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  UnBan:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list
+    path: ./ruleset/UnBan.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  BanAD:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list
+    path: ./ruleset/BanAD.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  BanProgramAD:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list
+    path: ./ruleset/BanProgramAD.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  adobe:
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/adobe.list
+    path: ./ruleset/adobe.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  IDM:
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/IDM.list
+    path: ./ruleset/IDM.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  OpenAi:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list
+    path: ./ruleset/OpenAi.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  ai:
+    url: https://raw.githubusercontent.com/juewuy/ShellClash/master/rules/ai.list
+    path: ./ruleset/ai.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Copilot:
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/Copilot.list
+    path: ./ruleset/Copilot.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  GithubCopilot:
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/GithubCopilot.list
+    path: ./ruleset/GithubCopilot.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Claude:
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/Claude.list
+    path: ./ruleset/Claude.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  CloudflareCIDR:
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/CloudflareCIDR.list
+    path: ./ruleset/CloudflareCIDR.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  GoogleFCM:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list
+    path: ./ruleset/GoogleFCM.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  GoogleCN:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list
+    path: ./ruleset/GoogleCN.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  SteamCN:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/SteamCN.list
+    path: ./ruleset/SteamCN.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Microsoft:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list
+    path: ./ruleset/Microsoft.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Apple:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
+    path: ./ruleset/Apple.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Telegram:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list
+    path: ./ruleset/Telegram.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  YouTube:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
+    path: ./ruleset/YouTube.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Netflix:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list
+    path: ./ruleset/Netflix.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  ProxyMedia:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list
+    path: ./ruleset/ProxyMedia.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  Emby:
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/Emby.list
+    path: ./ruleset/Emby.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  ProxyLite:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list
+    path: ./ruleset/ProxyLite.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  CMBlog:
+    url: https://raw.githubusercontent.com/cmliu/ACL4SSR/main/Clash/CMBlog.list
+    path: ./ruleset/CMBlog.list
+    behavior: classical
+    interval: 86400
+    format: text
+    type: http
+  ChinaDomain:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list
+    path: ./ruleset/ChinaDomain.list
+    behavior: domain
+    interval: 86400
+    format: text
+    type: http
+  ChinaCompanyIp:
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list
+    path: ./ruleset/ChinaCompanyIp.list
+    behavior: ipcidr
+    interval: 86400
+    format: text
+    type: http
+rules:
+- RULE-SET,CFnat,🎯 全球直连
+- RULE-SET,LocalAreaNetwork,🎯 全球直连
+- RULE-SET,UnBan,🎯 全球直连
+- RULE-SET,BanAD,🛑 全球拦截
+- RULE-SET,BanProgramAD,🍃 应用净化
+- RULE-SET,adobe,🍃 应用净化
+- RULE-SET,IDM,🍃 应用净化
+- RULE-SET,OpenAi,🤖 OpenAi
+- RULE-SET,ai,🤖 OpenAi
+- RULE-SET,Copilot,🤖 OpenAi
+- RULE-SET,GithubCopilot,🤖 OpenAi
+- RULE-SET,Claude,🤖 OpenAi
+- RULE-SET,CloudflareCIDR,☁️ CloudFlareCDN
+- RULE-SET,GoogleFCM,📢 谷歌FCM
+- RULE-SET,GoogleCN,🎯 全球直连
+- RULE-SET,SteamCN,🎯 全球直连
+- RULE-SET,Microsoft,Ⓜ️ 微软服务
+- RULE-SET,Apple,🍎 苹果服务
+- RULE-SET,Telegram,📲 电报信息
+- RULE-SET,YouTube,📹 油管视频
+- RULE-SET,Netflix,🎥 奈飞视频
+- RULE-SET,ProxyMedia,🌍 国外媒体
+- RULE-SET,Emby,🌍 国外媒体
+- RULE-SET,ProxyLite,🚀 节点选择
+- RULE-SET,CMBlog,🚀 节点选择
+- RULE-SET,ChinaDomain,🎯 全球直连
+- RULE-SET,ChinaCompanyIp,🎯 全球直连
+- GEOIP,CN,🎯 全球直连
+- MATCH,🐟 漏网之鱼
